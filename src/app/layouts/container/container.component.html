@@ -1,12 +1,13 @@
-<header></header>
-<div class="main-container">
-    <!-- <router-outlet></router-outlet> -->
-    <about></about>
-    <education></education>
-    <div class="comp-full-center">
-        <button class="to-top-btn rounded-circle" (click)="toTop()" title="Back to top">
-            <i class="fas fa-chevron-up fa-lg"></i>
-        </button>
+<div class="justify-content-center p-4">
+  <div class="col-6">
+    <nav class="nav">
+      <a class="nav-link border border-secondary rounded" routerLink="field-validate">Field validate</a>
+      <a class="nav-link border border-secondary rounded" routerLink="cross-field-validate">Cross field validate</a>
+      <a class="nav-link border border-secondary rounded" routerLink="custom-validate">Custom field validate</a>
+      <a class="nav-link border border-secondary rounded" routerLink="form-array">Form array</a>
+    </nav>
+    <div class="pt-5">
+      <router-outlet></router-outlet>
     </div>
+  </div>
 </div>
-<footer></footer>

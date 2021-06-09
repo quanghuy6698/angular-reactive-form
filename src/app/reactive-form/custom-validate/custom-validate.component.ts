@@ -1,13 +1,13 @@
-import { Component } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
-import { intervalValidator } from "./custom-validate.validator";
+import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { intervalValidator } from './custom-validate.validator';
 
 @Component({
-  selector: "custom-validate",
-  templateUrl: "./custom-validate.component.html",
-  styleUrls: ["./custom-validate.component.css"],
+  selector: 'custom-validate',
+  templateUrl: './custom-validate.component.html',
+  styleUrls: ['./custom-validate.component.css'],
 })
-export class CustomFieldValidateComponent {
+export class CustomValidateComponent {
   createForm = this.fb.group({
     status: [],
     interval: [2, [intervalValidator]],

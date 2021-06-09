@@ -1,21 +1,15 @@
-import { FormGroup } from "@angular/forms";
+import { FormGroup } from '@angular/forms';
+import { IReactiveFormError } from 'src/app/shared/constants/reactive-form-error.model';
 
-function onnCreateDateValidator(
-  form: FormGroup
-): { [key: string]: boolean } | null {
-  const startDate = form.controls["startDate"].value;
-  const endDate = form.controls["endDate"].value;
+function minMaxValidate(form: FormGroup): IReactiveFormError | null {
+  const min = form.controls['min']?.value;
+  const max = form.controls['max']?.value;
 
-  const nowTime = new Date(getCurrentDateTime());
-  const startTime = new Date(startDate);
-  const endTime = new Date(endDate);
-
-  if (endTime < startTime) {
-    return { endBeforeStart: true };
-  } else if (startTime < nowTime) {
-    return { startBeforeNow: true };
+  if (min >= max) {
+    return { minBiggerMax: true };
   }
+
   return null;
 }
 
-export { onnCreateDateValidator };
+export { minMaxValidate };

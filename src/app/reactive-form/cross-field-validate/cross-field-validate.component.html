@@ -1,0 +1,18 @@
+<form name="demoForm" role="form" novalidate [formGroup]="demoForm">
+  <h2 class="text-info">Cross-field validate</h2>
+  <h3>For example: A simple Min and Max input</h3>
+  <div class="form-group">
+    <label>Min</label>
+    <input type="number" class="form-control" name="min" formControlName="min" />
+  </div>
+  <div class="form-group">
+    <label>Max</label>
+    <input type="number" class="form-control" name="max" formControlName="max" />
+    <small class="text-danger" *ngIf="demoForm.errors?.minBiggerMax">Max must bigger than min</small>
+  </div>
+  <div>
+    <button type="button" [disabled]="demoForm.invalid" class="btn btn-primary" (click)="save()">
+      <span>Save</span>
+    </button>
+  </div>
+</form>
