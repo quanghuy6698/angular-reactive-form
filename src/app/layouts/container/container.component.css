@@ -1,0 +1,22 @@
+.main-container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .main-container {
+        width: 96%;
+        margin: 0 auto;
+    }
+}
+
+.to-top-btn {
+    background-color: darkgray;
+    padding: 1rem;
+    /* border-radius: 50%; */
+    margin-bottom: 0.5rem;
+}
+
+.to-top-btn:hover {
+    background-color: aquamarine;
+}

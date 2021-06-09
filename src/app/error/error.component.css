@@ -1,0 +1,31 @@
+.error {
+    width: 60%;
+    margin: 0 auto;
+    background-color: var(--component-bg);
+    border-radius: 1rem;
+    margin-top: 1rem;
+    padding: 1.2rem;
+}
+
+.error-img {
+    width: 100%;
+    text-align: center;
+}
+
+.error-img img {
+    max-width: 20rem;
+    height: auto;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.error-msg {
+    width: 100%;
+    text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .error {
+        width: 96%;
+    }
+}
