@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { minMaxValidate } from './cross-field-validate.validator';
+import { minMaxValidator } from './cross-field-validate.validator';
 
 @Component({
   selector: 'cross-field-validate',
@@ -14,7 +14,7 @@ export class CrossFieldValidateComponent {
       min: [0],
       max: [1],
     },
-    { validators: [minMaxValidate] }
+    { validators: [minMaxValidator] }
   );
 
   constructor(private formBuilder: FormBuilder) {}

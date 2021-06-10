@@ -1,7 +1,7 @@
 import { FormGroup } from '@angular/forms';
 import { IReactiveFormError } from 'src/app/shared/constants/reactive-form-error.model';
 
-function minMaxValidate(form: FormGroup): IReactiveFormError | null {
+function minMaxValidator(form: FormGroup): IReactiveFormError | null {
   const min = form.controls['min']?.value;
   const max = form.controls['max']?.value;
 
@@ -12,4 +12,4 @@ function minMaxValidate(form: FormGroup): IReactiveFormError | null {
   return null;
 }
 
-export { minMaxValidate };
+export { minMaxValidator };
