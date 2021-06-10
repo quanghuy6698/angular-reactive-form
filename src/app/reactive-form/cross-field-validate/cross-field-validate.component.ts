@@ -8,6 +8,7 @@ import { minMaxValidate } from './cross-field-validate.validator';
   styleUrls: ['./cross-field-validate.component.css'],
 })
 export class CrossFieldValidateComponent {
+  saveNotification: string = '';
   demoForm = this.formBuilder.group(
     {
       min: [0],
@@ -19,6 +20,6 @@ export class CrossFieldValidateComponent {
   constructor(private formBuilder: FormBuilder) {}
 
   save() {
-    console.log('save successfully');
+    this.saveNotification = 'Save successfully!';
   }
 }
