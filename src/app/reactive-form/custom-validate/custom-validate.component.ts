@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { passwordStrengthValidator } from './custom-validate.validator';
+import { pinCodeValidator } from './custom-validate.validator';
 
 @Component({
   selector: 'custom-validate',
@@ -11,7 +11,7 @@ export class CustomValidateComponent {
   createNotification: string = '';
   demoForm = this.formBuilder.group({
     username: ['', [Validators.required, Validators.pattern(/[a-zA-Z0-9]{8,254}/)]],
-    password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(254), passwordStrengthValidator]],
+    pinCode: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(6), pinCodeValidator]],
   });
 
   constructor(private formBuilder: FormBuilder) {}
