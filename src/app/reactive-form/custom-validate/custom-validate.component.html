@@ -1,0 +1,21 @@
+<form name="demoForm" role="form" novalidate [formGroup]="demoForm">
+  <h2 class="text-info">Custom validate</h2>
+  <h3>For example: A simple account input form with PIN code</h3>
+  <div class="form-group">
+    <label>Username</label>
+    <input type="text" class="form-control" name="username" formControlName="username" />
+  </div>
+  <div class="form-group">
+    <label>PIN Code <span class="text-info">(4 or 6 numbers)</span></label>
+    <input type="password" class="form-control" name="pinCode" formControlName="pinCode" />
+    <small class="text-danger" *ngIf="demoForm.get('pinCode')?.errors?.weakPinCode">Weak PIN code</small>
+    <small class="text-danger" *ngIf="demoForm.get('pinCode')?.errors?.invalidPinCode">Invalid PIN code</small>
+  </div>
+  <div>
+    <button type="button" [disabled]="demoForm.invalid" class="btn btn-primary" (click)="create()">
+      <span>Create</span>
+    </button>
+    &nbsp;&nbsp;
+    <small class="text-success">{{ createNotification }}</small>
+  </div>
+</form>

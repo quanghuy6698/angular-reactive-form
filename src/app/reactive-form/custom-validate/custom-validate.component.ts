@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { intervalValidator } from './custom-validate.validator';
+import { FormBuilder, Validators } from '@angular/forms';
+import { pinCodeValidator } from './custom-validate.validator';
 
 @Component({
   selector: 'custom-validate',
@@ -8,13 +8,15 @@ import { intervalValidator } from './custom-validate.validator';
   styleUrls: ['./custom-validate.component.css'],
 })
 export class CustomValidateComponent {
-  createForm = this.fb.group({
-    status: [],
-    interval: [2, [intervalValidator]],
-    startDate: [],
-    endDate: [],
-    careScriptId: [],
+  createNotification: string = '';
+  demoForm = this.formBuilder.group({
+    username: ['', [Validators.required, Validators.pattern(/[a-zA-Z0-9]{8,254}/)]],
+    pinCode: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(6), pinCodeValidator]],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) {}
+
+  create() {
+    this.createNotification = 'Save successfully!';
+  }
 }
