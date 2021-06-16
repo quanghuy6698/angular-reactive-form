@@ -1,6 +1,8 @@
 <form name="productGroupForm" role="form" novalidate [formGroup]="productGroupForm">
+  <h2 class="text-info">Form Array</h2>
+  <h3>For example: Create a product group</h3>
   <div class="form-group">
-    <label for="productGroup"></label>
+    <label for="productGroup">Product group</label>
     <input type="text" class="form-control" id="productGroup" formControlName="productGroup" />
   </div>
 
@@ -39,16 +41,29 @@
     </form>
   </div>
 
-  <div>
-    <button type="button" class="btn btn-primary" (click)="createProductGroup()">
+  <div class="mt-2 mb-2">
+    <button type="button" class="btn btn-primary" [disabled]="productGroupForm.invalid" (click)="createProductGroup()">
       <span>Create</span>
     </button>
   </div>
 
-  <div *ngFor="let product of productListDisplay">
-    <span>{{ product.name }}</span
-    >_ <span>{{ product.quantity }}</span
-    >_
-    <span>{{ product.price }}</span>
-  </div>
+  <h6>Products of group:</h6>
+  <table class="prod-list">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productListDisplay; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.price }}</td>
+      </tr>
+    </tbody>
+  </table>
 </form>

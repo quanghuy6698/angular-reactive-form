@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IProduct } from 'src/app/shared/constants/product.model';
+import { IProduct } from 'src/app/shared/model/product.model';
 
 @Component({
   selector: 'form-array',
@@ -26,7 +26,7 @@ export class FormArrayComponent implements OnInit {
    *
    * @return productList
    */
-  get productList() {
+  get productList(): FormArray {
     return this.productGroupForm.controls['productList'] as FormArray;
   }
 
@@ -36,7 +36,7 @@ export class FormArrayComponent implements OnInit {
    * @param index refer productForm index in productList
    * @returns productForm
    */
-  getProductForm(index: number) {
+  getProductForm(index: number): FormGroup {
     return this.productList.at(index) as FormGroup;
   }
 
@@ -64,8 +64,8 @@ export class FormArrayComponent implements OnInit {
   createProductForm(): FormGroup {
     return this.formBuilder.group({
       name: [''],
-      quantity: [0, [Validators.required, Validators.min(0)]],
-      price: [1, [Validators.required, Validators.min(1)]],
+      quantity: [0],
+      price: [1],
     });
   }
 
