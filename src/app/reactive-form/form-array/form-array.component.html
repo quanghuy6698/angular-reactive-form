@@ -1,152 +1,54 @@
-<div class="row justify-content-center">
-  <div class="col-8">
-    <form name="createForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="createForm">
-      <h2>Thêm mới kịch bản nuôi tài khoản</h2>
+<form name="productGroupForm" role="form" novalidate [formGroup]="productGroupForm">
+  <div class="form-group">
+    <label for="productGroup"></label>
+    <input type="text" class="form-control" id="productGroup" formControlName="productGroup" />
+  </div>
 
-      <div>
-        <jhi-alert-error></jhi-alert-error>
-
-        <div class="form-group">
-          <label for="field_channel">Mạng xã hội</label>
-          <select id="field_channel" name="channel" class="form-control" formControlName="channel" (change)="selectChannel($event)">
-            <option *ngFor="let ch of channels" value="{{ ch.id }}">{{ ch.name }}</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" for="field_name">Tên kịch bản</label>
-          <input
-            type="text"
-            class="form-control"
-            name="careScriptName"
-            id="field_name"
-            required
-            formControlName="careScriptName"
-            (change)="validSpaceName($event)"
-          />
-          <span class="text-danger small" *ngIf="createForm.get('careScriptName').errors?.required">Bắt buộc</span>
-        </div>
-
-        <span class="text-info small"
-          >*Lưu ý: Độ trễ phải > 0. Giới hạn số lần thực hiện trong ngày phải >= 0 (0 được coi như không có giới hạn)</span
-        >
-
-        <!-- <div class="form-group" formArrayName="careScriptSteps">
-          <div *ngFor="let step of careScriptSteps.controls; let i = index">
-            <table class="table-responsive table-borderless">
-              <tbody [formGroup]="getFormGroupAtIndex(i)">
-                <tr>
-                  <td><label class="form-control-label" for="step">Hành động</label></td>
-                  <td><label class="form-control-label" for="delay">Độ trễ (giây)</label></td>
-                  <td><label class="form-control-label" for="limitPerDay">Giới hạn số lần thực hiện hàng ngày</label></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>
-                    <select class="form-control" id="field_action" formControlName="action">
-                      <option *ngFor="let act of actions" [ngValue]="act.id">{{ act.description }}</option>
-                    </select>
-                  </td>
-                  <td>
-                    <input
-                      type="number"
-                      class="form-control"
-                      style="max-width: 100px"
-                      name="delay"
-                      id="field_delay"
-                      formControlName="delay"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="number"
-                      class="form-control"
-                      style="max-width: 100px"
-                      name="delay"
-                      id="field_limitPerDay"
-                      formControlName="limitPerDay"
-                    />
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-info rounded-circle" (click)="removeStep(i)">
-                      <fa-icon [icon]="['fas', 'trash-alt']" size="lg"></fa-icon>
-                    </button>
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-info rounded-circle" (click)="newStep(i)">
-                      <fa-icon [icon]="['fas', 'plus']" size="lg"></fa-icon>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div> -->
-
-        <div *ngFor="let step of careScriptSteps.controls; let i = index">
-          <form role="form" novalidate [formGroup]="getFormGroupAtIndex(i)">
-            <table class="table-responsive table-borderless">
-              <tbody>
-                <tr>
-                  <td><label class="form-control-label" for="step">Hành động</label></td>
-                  <td><label class="form-control-label" for="delay">Độ trễ (giây)</label></td>
-                  <td><label class="form-control-label" for="limitPerDay">Giới hạn số lần thực hiện hàng ngày</label></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>
-                    <select class="form-control" id="field_action" formControlName="action">
-                      <option *ngFor="let act of actions" [ngValue]="act.id">{{ act.description }}</option>
-                    </select>
-                  </td>
-                  <td>
-                    <input
-                      type="number"
-                      class="form-control"
-                      style="max-width: 100px"
-                      name="delay"
-                      id="field_delay"
-                      formControlName="delay"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="number"
-                      class="form-control"
-                      style="max-width: 100px"
-                      name="limitPerDay"
-                      id="field_limitPerDay"
-                      formControlName="limitPerDay"
-                    />
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-info rounded-circle" (click)="removeStep(i)">
-                      <fa-icon [icon]="['fas', 'trash-alt']" size="lg"></fa-icon>
-                    </button>
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-info rounded-circle" (click)="newStep(i)">
-                      <fa-icon [icon]="['fas', 'plus']" size="lg"></fa-icon>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </form>
-        </div>
-      </div>
-
-      <div>
-        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
-
-        <button type="submit" id="save-entity" [disabled]="createForm.invalid || isSaving" class="btn btn-primary">
-          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-        </button>
-      </div>
+  <div *ngFor="let productForm of productList.controls; let i = index">
+    <form role="form" novalidate [formGroup]="getProductForm(i)">
+      <table class="table-responsive table-borderless">
+        <tbody>
+          <tr>
+            <td><label class="form-control-label" for="name">Name</label></td>
+            <td><label class="form-control-label" for="quantity">Quantity</label></td>
+            <td><label class="form-control-label" for="price">Price</label></td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" class="form-control" id="name" formControlName="name" />
+            </td>
+            <td>
+              <input type="text" class="form-control" id="quantity" formControlName="quantity" />
+            </td>
+            <td>
+              <input type="text" class="form-control" id="price" formControlName="price" />
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger rounded-circle" (click)="deleteProduct(i)">
+                <span>x</span>
+              </button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-info rounded-circle" (click)="newProduct(i)">
+                <span>+</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </form>
   </div>
-</div>
+
+  <div>
+    <button type="button" class="btn btn-primary" (click)="createProductGroup()">
+      <span>Create</span>
+    </button>
+  </div>
+
+  <div *ngFor="let product of productListDisplay">
+    <span>{{ product.name }}</span
+    >_ <span>{{ product.quantity }}</span
+    >_
+    <span>{{ product.price }}</span>
+  </div>
+</form>
